@@ -1,0 +1,18 @@
+.spell-list-item {
+    background-color: bisque;
+    color: #000;
+    padding: 20px 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color ease-in 150ms;
+
+    &:hover {
+        background-color: #e5b67e;
+
+        .spell-name {
+            text-decoration: underline;
+        }
+    }
+}
