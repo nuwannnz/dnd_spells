@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
-import { fetchAllSpells } from "./spellList.slice";
+import { fetchAllSpellsAsync } from "../spell.slice";
 import SpellListItem from "./SpellListItem";
 import Spinner from "../../../components/spinner";
 import ErrorMessage from "../../../components/errorMessage";
@@ -19,7 +19,7 @@ const SpellList: React.FC = () => {
   useEffect(() => {
     // fetch spells if not loaded
     if (!spells) {
-      appDispatch(fetchAllSpells());
+      appDispatch(fetchAllSpellsAsync());
     }
   }, []);
 

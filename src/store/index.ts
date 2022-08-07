@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import spellListReducer from "../features/spells/spellList/spellList.slice";
+import spellReducer from "../features/spells/spell.slice";
 
 export const store = configureStore({
   reducer: {
-    spells: spellListReducer,
+    spells: spellReducer,
   },
 });
 
