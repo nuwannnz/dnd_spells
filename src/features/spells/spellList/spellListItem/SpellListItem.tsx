@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import FavouriteButton from "../favouriteButton/FavouriteButton";
-import { SpellListItemData } from "../types";
+import FavouriteButton from "../../favouriteButton/FavouriteButton";
+import { SpellListItemData } from "../../types";
 
 import "./SpellListItem.scss";
 
@@ -14,6 +14,7 @@ const SpellListItem: React.FC<Props> = ({ spell }) => {
       to={`/spell/${spell.index}`}
       className="spell-list-item"
       title="Click to view details"
+      data-testid="spell-row"
     >
       <span className="spell-name">{spell.name}</span>
       <FavouriteButton spellIndex={spell.index} />

@@ -1,5 +1,5 @@
 import React from "react";
-import { SpellFilterType } from "../types";
+import { SpellFilterType } from "../../types";
 
 import "./SpellFilter.scss";
 

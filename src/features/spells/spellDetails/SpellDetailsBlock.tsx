@@ -7,7 +7,7 @@ interface Props {
 }
 const SpellDetailsBlock: React.FC<Props> = ({ title, content, className }) => {
   return (
-    <div className={`details-block spell-description ${className ?? ""}`}>
+    <div className={`details-block ${className ?? ""}`}>
       <span className="block-title">{title}</span>
       <span className="content">{content}</span>
     </div>

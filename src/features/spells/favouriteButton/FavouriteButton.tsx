@@ -39,7 +39,11 @@ const FavouriteButton: React.FC<Props> = ({ spellIndex }) => {
       onClick={handleFavouriteClick}
       title={isFavourite ? "Remove from favourites" : "Add to favourites"}
     >
-      <FontAwesomeIcon icon={isFavourite ? faHeart : farHeart} size="2x" />
+      <FontAwesomeIcon
+        icon={isFavourite ? faHeart : farHeart}
+        size="2x"
+        data-testid="favourite-icon"
+      />
     </button>
   );
 };
