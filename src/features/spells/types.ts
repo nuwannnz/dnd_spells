@@ -44,3 +44,5 @@ export interface Spell extends SpellListItemData {
     name: string;
   };
 }
+
+export type SpellFilterType = "all" | "favourites";
