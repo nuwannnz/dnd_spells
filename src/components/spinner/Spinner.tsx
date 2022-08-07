@@ -4,7 +4,7 @@ import "./Spinner.scss";
 
 const Spinner: React.FC = () => {
   return (
-    <div className="spinner">
+    <div className="spinner" title="Loading...">
       <span className="loader"></span>
     </div>
   );

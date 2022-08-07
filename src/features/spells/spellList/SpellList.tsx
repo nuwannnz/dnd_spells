@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
 import { fetchAllSpellsAsync } from "../spell.slice";
-import SpellListItem from "./SpellListItem";
+import SpellListItem from "./spellListItem";
 import Spinner from "../../../components/spinner";
 import ErrorMessage from "../../../components/errorMessage";
-import SpellFilter from "./SpellFilter";
+import SpellFilter from "./spellFilter/";
 import { SpellFilterType, SpellListItemData } from "../types";
 
 import "./SpellList.scss";
