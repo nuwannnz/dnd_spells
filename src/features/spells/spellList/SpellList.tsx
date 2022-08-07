@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
 import { fetchAllSpellsAsync } from "../spell.slice";
 import SpellListItem from "./SpellListItem";
 import Spinner from "../../../components/spinner";
 import ErrorMessage from "../../../components/errorMessage";
+import SpellFilter from "./SpellFilter";
+import { SpellFilterType, SpellListItemData } from "../types";
 
 import "./SpellList.scss";
 
@@ -15,6 +17,14 @@ const SpellList: React.FC = () => {
     data: spells,
     error,
   } = useSelector((state: RootState) => state.spells.spellList);
+  const favourites = useSelector(
+    (state: RootState) => state.spells.favouriteSpellIndexes
+  );
+
+  const [spellFilter, setSpellFilter] = useState<SpellFilterType>("all");
+  const [filteredSpellList, setFilteredSpellList] = useState<
+    SpellListItemData[]
+  >([]);
 
   useEffect(() => {
     // fetch spells if not loaded
@@ -22,6 +32,18 @@ const SpellList: React.FC = () => {
       appDispatch(fetchAllSpellsAsync());
     }
   }, []);
+
+  useEffect(() => {
+    if (spells) {
+      if (spellFilter === "all") {
+        setFilteredSpellList(spells);
+      } else if (spellFilter === "favourites") {
+        setFilteredSpellList(
+          spells.filter((spell) => favourites.includes(spell.index))
+        );
+      }
+    }
+  }, [spells, spellFilter, favourites]);
 
   if (loading) {
     return (
@@ -37,7 +59,22 @@ const SpellList: React.FC = () => {
 
   return (
     <div className="spell-list">
-      {spells?.map((spell) => (
+      <div className="spell-filter-container">
+        <SpellFilter
+          filterKey="all"
+          name="All"
+          activeFilter={spellFilter}
+          onClickHandler={(filter) => setSpellFilter(filter)}
+        />
+        <SpellFilter
+          filterKey="favourites"
+          name="Favourites"
+          activeFilter={spellFilter}
+          onClickHandler={(filter) => setSpellFilter(filter)}
+        />
+      </div>
+
+      {filteredSpellList.map((spell) => (
         <SpellListItem key={spell.index} spell={spell} />
       ))}
     </div>

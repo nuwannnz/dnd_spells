@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchSpellByIndex, fetchSpells } from "../../api/spell";
 import { mapSpellDtoToSpell } from "../../helpers/spell";
+import { AppDispatch, RootState } from "../../store";
 import { Spell, SpellListItemData } from "./types";
 
 interface SpellState {
@@ -14,6 +15,7 @@ interface SpellState {
     error: string | null;
     data: Spell | null;
   };
+  favouriteSpellIndexes: string[];
 }
 
 const initialState: SpellState = {
@@ -27,6 +29,7 @@ const initialState: SpellState = {
     error: null,
     data: null,
   },
+  favouriteSpellIndexes: [],
 };
 
 /**
@@ -62,12 +65,62 @@ export const fetchSpellByIndexAsync = createAsyncThunk<
   }
 });
 
+/**
+ * Loads spell favourites from the localstorage and set them
+ * in the redux store
+ */
+export function loadSpellFavourites() {
+  return (dispatch: AppDispatch) => {
+    const favourites = localStorage.getItem("spell_favourites");
+    if (favourites) {
+      dispatch(spellSlice.actions.setFavourites(JSON.parse(favourites)));
+    }
+  };
+}
+
+/**
+ * Mark a spell as favourite and save all the favourites from the redux state to the localstorage
+ */
+export function addFavouriteAndSave(spellIndex: string) {
+  return (dispatch: AppDispatch, getState: () => RootState) => {
+    const {
+      spells: { favouriteSpellIndexes },
+    } = getState();
+    const updatedFavourtes = [...favouriteSpellIndexes, spellIndex];
+
+    console.log("ss", favouriteSpellIndexes);
+    localStorage.setItem("spell_favourites", JSON.stringify(updatedFavourtes));
+    dispatch(spellActions.setFavourites(updatedFavourtes));
+  };
+}
+
+/**
+ * Mark a spell as non-favourite and save all the favourites from the redux state to the localstorage
+ */
+export function removeFavouriteAndSave(spellIndex: string) {
+  return (dispatch: AppDispatch, getState: () => RootState) => {
+    const {
+      spells: { favouriteSpellIndexes },
+    } = getState();
+    const updatedFavourtes = favouriteSpellIndexes.filter(
+      (index) => index !== spellIndex
+    );
+
+    console.log("ss", favouriteSpellIndexes);
+    localStorage.setItem("spell_favourites", JSON.stringify(updatedFavourtes));
+    dispatch(spellActions.setFavourites(updatedFavourtes));
+  };
+}
+
 export const spellSlice = createSlice({
   name: "spells",
   initialState,
   reducers: {
     resetSpellByIndex: (state) => {
       state.spellByIndex = initialState.spellByIndex;
+    },
+    setFavourites: (state, action: PayloadAction<string[]>) => {
+      state.favouriteSpellIndexes = action.payload;
     },
   },
   extraReducers: (builder) => {

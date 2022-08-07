@@ -7,6 +7,7 @@
     cursor: pointer;
     text-decoration: none;
     transition: background-color ease-in 150ms;
+    position: relative;
 
     &:hover {
         background-color: #e5b67e;
@@ -14,5 +15,12 @@
         .spell-name {
             text-decoration: underline;
         }
+    }
+
+    .spell-favourite-button {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
     }
 }

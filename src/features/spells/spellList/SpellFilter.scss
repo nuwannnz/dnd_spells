@@ -1,0 +1,20 @@
+.spell-filter {
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    text-transform: uppercase;
+    transition: background-color ease-in 100ms;
+    min-width: 100px;
+
+    &.active {
+        background-color: rgba($color: #6d4c41, $alpha: 0.4);
+    }
+
+    &:hover:not(.active) {
+        background-color: rgba($color: #6d4c41, $alpha: 0.1);
+    }
+}

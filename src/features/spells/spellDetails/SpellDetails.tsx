@@ -8,6 +8,7 @@ import Spinner from "../../../components/spinner";
 import SpellDetailsBlock from "./SpellDetailsBlock";
 import { AppDispatch, RootState } from "../../../store";
 import { fetchSpellByIndexAsync, spellActions } from "../spell.slice";
+import FavouriteButton from "../favouriteButton/FavouriteButton";
 
 import "./SpellDetails.scss";
 
@@ -54,10 +55,13 @@ const SpellDetails: React.FC<Props> = ({ spellIndex }) => {
   return (
     <div className="spell-details">
       <div className="spell-details-header">
-        <Link to="/" title="Go back to spell list">
-          <FontAwesomeIcon icon={faArrowLeft} size="2x" />
-        </Link>
-        <h1>{spell?.name}</h1>
+        <div className="title-wrapper">
+          <Link to="/" title="Go back to spell list">
+            <FontAwesomeIcon icon={faArrowLeft} size="2x" />
+          </Link>
+          <h1>{spell?.name}</h1>
+        </div>
+        <FavouriteButton spellIndex={spell?.index} />
       </div>
       <div className="spell-details-container">
         <div className="top-row">
