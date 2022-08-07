@@ -88,7 +88,6 @@ export function addFavouriteAndSave(spellIndex: string) {
     } = getState();
     const updatedFavourtes = [...favouriteSpellIndexes, spellIndex];
 
-    console.log("ss", favouriteSpellIndexes);
     localStorage.setItem("spell_favourites", JSON.stringify(updatedFavourtes));
     dispatch(spellActions.setFavourites(updatedFavourtes));
   };
@@ -106,7 +105,6 @@ export function removeFavouriteAndSave(spellIndex: string) {
       (index) => index !== spellIndex
     );
 
-    console.log("ss", favouriteSpellIndexes);
     localStorage.setItem("spell_favourites", JSON.stringify(updatedFavourtes));
     dispatch(spellActions.setFavourites(updatedFavourtes));
   };

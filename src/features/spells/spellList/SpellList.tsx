@@ -5,7 +5,7 @@ import { fetchAllSpellsAsync } from "../spell.slice";
 import SpellListItem from "./spellListItem";
 import Spinner from "../../../components/spinner";
 import ErrorMessage from "../../../components/errorMessage";
-import SpellFilter from "./spellFilter/";
+import SpellFilter from "./spellFilter";
 import { SpellFilterType, SpellListItemData } from "../types";
 
 import "./SpellList.scss";
