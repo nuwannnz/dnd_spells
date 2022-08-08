@@ -5,7 +5,7 @@ import { BrowserTracing } from '@sentry/tracing';
  * Initialize the Sentry error logging
  */
 export const configSentry = () => {
-    if(process.env.SENTRY_DSN) {
+    if(process.env.REACT_APP_SENTRY_DSN) {
         Sentry.init({
             dsn: process.env.SENTRY_DSN,
             integrations: [new BrowserTracing()],
