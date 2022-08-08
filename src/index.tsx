@@ -5,6 +5,10 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { setupStore } from "./store";
 import Layout from "./Layout";
+import { configSentry } from "./helpers/sentry";
+
+// setup sentry error handling
+configSentry();
 
 // initialize store
 const store = setupStore();
@@ -12,6 +16,7 @@ const store = setupStore();
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
